@@ -30,12 +30,17 @@ class FooCharm(ops.CharmBase):
         self.framework.observe(self.on.leader_settings_changed, self._on_event)
         self.framework.observe(self.on.start, self._on_event)
         self.framework.observe(self.on.update_status, self._on_event)
+        self.framework.observe(self.on.update_status, self._on_update_status)
         self.framework.observe(self.on.upgrade_charm, self._on_event)
         self.framework.observe(self.on.stop, self._on_event)
         self.framework.observe(self.on.remove, self._on_event)
 
     def _on_event(self, event: ops.EventBase):
         logger.info(f"Event: {type(event)}")
+
+    def _on_update_status(self, _):
+        pass
+        # raise Exception
 
 if __name__ == "__main__":  # pragma: nocover
     ops.main(FooCharm)  # type: ignore
